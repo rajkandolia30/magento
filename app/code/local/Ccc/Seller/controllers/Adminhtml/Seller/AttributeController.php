@@ -62,8 +62,8 @@ class Ccc_Seller_Adminhtml_Seller_AttributeController extends Mage_Adminhtml_Con
         $this->loadLayout();
         $this->_setActiveMenu('seller');
         $this->renderLayout();
-        //Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
-        // die();
+        /*Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());
+        die();*/
 	}
 
 	public function validateAction(){
@@ -233,21 +233,25 @@ class Ccc_Seller_Adminhtml_Seller_AttributeController extends Mage_Adminhtml_Con
             // entity type check
             $model->load($id);
             if ($model->getEntityTypeId() != $this->_entityTypeId || !$model->getIsUserDefined()) {
-                Mage::getSingleton('seller/session')->addError('This attribute cannot be deleted.');
+                Mage::getSingleton('seller/session')->addError(
+                    Mage::helper('seller')->__('This attribute cannot be deleted.'));
                 $this->_redirect('*/*/');
+                return;
             }
-
             try {
                 $model->delete();
-                Mage::getSingleton('seller/session')->addSuccess('The seller attribute has been deleted.');
+                Mage::getSingleton('seller/session')->addSuccess(
+                    Mage::helper('seller')->__('The seller attribute has been deleted.'));
                 $this->_redirect('*/*/');
+                return;
             }
             catch (Exception $e) {
                 Mage::getSingleton('seller/session')->addError($e->getMessage());
                 $this->_redirect('*/*/edit', array('attribute_id' => $this->getRequest()->getParam('attribute_id')));
+                return;
             }
         }
-        Mage::getSingleton('seller/session')->addError('Unable to find an attribute to delete.');
+        Mage::getSingleton('seller/session')->addError(Mage::helper('seller')->__('Unable to find an attribute to delete.'));
         $this->_redirect('*/*/');
     }
 }

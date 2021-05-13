@@ -33,7 +33,7 @@ class Ccc_Seller_Block_Adminhtml_Seller_Grid extends Mage_Adminhtml_Block_Widget
             'seller/firstname',
             'entity_id',
             null,
-            'inner',
+            'left',
             $adminStore
         );
 
@@ -42,7 +42,7 @@ class Ccc_Seller_Block_Adminhtml_Seller_Grid extends Mage_Adminhtml_Block_Widget
             'seller/lastname',
             'entity_id',
             null,
-            'inner',
+            'left',
             $adminStore
         );
         $collection->joinAttribute(
@@ -50,14 +50,14 @@ class Ccc_Seller_Block_Adminhtml_Seller_Grid extends Mage_Adminhtml_Block_Widget
             'seller/email',
             'entity_id',
             null,
-            'inner',
+            'left',
             $adminStore
         );
         $collection->joinAttribute(
             'phoneNo',
             'seller/phoneNo',
             'entity_id',
-            null,
+            null,   
             'left',
             $adminStore
         );
@@ -66,7 +66,7 @@ class Ccc_Seller_Block_Adminhtml_Seller_Grid extends Mage_Adminhtml_Block_Widget
             'seller/entity_id',
             'entity_id',
             null,
-            'inner',
+            'left',        
             $adminStore
         );
         $this->setCollection($collection);

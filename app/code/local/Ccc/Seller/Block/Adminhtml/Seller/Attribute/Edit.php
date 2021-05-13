@@ -1,7 +1,7 @@
 <?php 
 class Ccc_Seller_Block_Adminhtml_Seller_Attribute_Edit extends Mage_Adminhtml_Block_Widget_Form_Container{
 	public function __construct(){
-		$this->_controller = 'adminhtml_seller_attribute';
+        $this->_controller = 'adminhtml_seller_attribute';
 		$this->_headerText = 'Manage';
 		$this->_blockGroup = 'seller';
 		$this->_objectId = 'attribute_id';

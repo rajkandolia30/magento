@@ -7,13 +7,32 @@
 	</modules>
 	<admin>
 		<routers>
-			<seller>
-				<use>admin</use>
+			<adminhtml>
 				<args>
-					<module>Ccc_Seller</module>
-					<frontName>seller</frontName>
+					<modules>
+						<ccc_seller>Ccc_Seller</ccc_seller>
+					</modules>
 				</args>
-			</seller>
+			</adminhtml>	
+
+			<!-- <admin>
+				<routers>
+					<vendor>
+						<use>admin</use>
+						<args>
+							<module>Ccc_Vendor</module>
+							<frontName>vendor</frontName>
+						</args>
+					</vendor>
+				</routers>
+			</admin>		 -->
+			<!-- <vendor>
+				<args>
+					<modules>
+						<vendor before="Ccc_Vendor">Ccc_Seller_Adminhtml</vendor>
+					</modules>
+				</args>
+			</vendor> -->
 		</routers>
 	</admin>
 	<adminhtml>
@@ -25,17 +44,17 @@
 					<seller>
 						<title>Manage Seller</title>
 						<sort_order>1</sort_order>
-						<action>seller/adminhtml_seller</action>
+						<action>*/adminhtml_seller</action>
 					</seller>
 					<seller1>
 						<title>Manage Attribute</title>
 						<sort_order>2</sort_order>
-						<action>seller/adminhtml_seller_attribute</action>
+						<action>*/adminhtml_seller_attribute</action>
 					</seller1>
 					<seller2>
 						<title>Manage Attribute Set</title>
 						<sort_order>3</sort_order>
-						<action>seller/adminhtml_seller_set</action>
+						<action>*/adminhtml_seller_set</action>
 					</seller2>
 				</children>
 			</seller>
