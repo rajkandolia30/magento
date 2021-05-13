@@ -36,10 +36,6 @@ class Ccc_Seller_Adminhtml_SellerController extends Mage_Adminhtml_Controller_Ac
             	$this->_getSession()->addError(Mage::helper('seller')->__('This seller no longer exists.'));
             	$this->_redirect('*/*/');
            	}
-			$block = $this->getLayout()->createBlock('seller/adminhtml_seller_edit');
-			$this->_addContent($block);
-			$tab = $this->getLayout()->createBlock('seller/adminhtml_seller_edit_tabs');
-			$this->_addLeft($tab);
 			$this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 			$this->renderLayout();			
 		} catch (Exception $e) {
