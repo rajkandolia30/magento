@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules><!-- name and version of module -->
+		<Ccc_Raj>
+			<version>0.0.5</version>
+		</Ccc_Raj>
+	</modules>
+	<frontend><!-- frontend related -->
+		<routers>
+			<raj>
+				<use>standard</use><!-- for frontend -->
+				<args>
+					<module>Ccc_Raj</module><!-- path -->
+					<frontName>raj</frontName><!-- alias of module\used in url-->
+				</args>
+			</raj>
+		</routers>
+		<layout>
+			<updates>
+				<raj>
+					<file>raj.xml</file>
+				</raj>
+			</updates>
+		</layout>
+	</frontend>
+	<admin>
+		<routers>
+			<!-- ovewrite controller -->
+			<adminhtml>
+				<args>
+					<modules>
+						<!-- Mage_Adminhtml_Catalog_ProductController -->
+						<!-- can be any tag -->
+						<catalog before="Mage_Adminhtml">Ccc_Raj_Adminhtml</catalog>
+						<!-- Ccc_Raj_Adminhtml_Catalog_ProductController-->					
+					</modules>
+				</args>
+			</adminhtml>
+			<raj>
+				<use>admin</use><!-- for admin -->
+				<args>
+					<module>Ccc_Raj</module>
+					<frontName>raj</frontName>
+				</args>
+			</raj>
+		</routers>
+	</admin>
+	<adminhtml>
+		<menu>
+			<raj><!--key for menu -->
+				<title>Raj</title> <!-- title of menu -->
+				<sort_order>90</sort_order>
+				<children>
+					<raj><!-- first child -->
+						<title>Grid</title>
+						<sort_order>1</sort_order>
+						<!-- if no children->module/type of module_controllerName/actionName-->
+						<action>raj/adminhtml_raj/grid</action>
+					</raj>
+					<raj1><!-- second child -->
+						<title>Manage</title>
+						<sort_order>1</sort_order>
+						<children>
+							<raj><!-- first child of manage -->
+								<title>Add</title>
+								<sort_order>1</sort_order>
+								<action>raj/adminhtml_raj/new</action>
+							</raj>
+							<raj1><!-- second child of manage -->
+								<title>Edit</title>
+								<sort_order>2</sort_order>
+								<action>raj/adminhtml_raj/edit</action>
+							</raj1>
+						</children>
+					</raj1>
+				</children>
+			</raj>
+		</menu>
+		<acl><!-- access control lease whom to allow for admin side -->
+			<resources>
+				<admin>
+					<children>
+						<raj>
+							<title>Raj</title> 
+							<sort_order>90</sort_order>
+							<children>
+								<raj>
+									<title>Grid</title> 
+								</raj>
+								<raj1>
+									<title>Manage</title> 
+									<children>
+										<raj>
+											<title>Add</title>
+										</raj>
+										<raj1>
+											<title>Edit</title>
+										</raj1>
+									</children>
+								</raj1>
+							</children>
+						</raj>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+	<global><!-- for block,model,helper,sql -->
+		<blocks>
+			<!-- overite block -->
+			<adminhtml>
+				<rewrite>
+					<catalog_product_grid>Ccc_Raj_Block_Adminhtml_Catalog_Product_Grid</catalog_product_grid>
+				</rewrite>
+			</adminhtml>
+			<raj>
+				<class>Ccc_Raj_Block</class><!-- block path -->
+			</raj>
+		</blocks>
+		<models>
+			<!-- overrite model -->
+			<catalog>
+				<rewrite>
+					<product>Ccc_Raj_Model_Catalog_Product</product>
+				</rewrite>
+			</catalog>
+			<raj>
+				<class>Ccc_Raj_Model</class><!-- model path -->
+				<resourceModel>Ccc_Raj_Resource</resourceModel><!-- resource path -->
+			</raj>
+			<Ccc_Raj_Resource>
+				<class>Ccc_Raj_Model_Resource</class><!-- model resource path -->
+				<entities><!-- table name -->
+					<raj>
+						<table>CccRaj</table><!-- table 1 -->
+					</raj>
+					<raj1>
+						<table>CccRaj1</table> <!-- table 2 -->
+					</raj1> 
+				</entities>
+			</Ccc_Raj_Resource>
+		</models>
+		<resources>
+			<Raj_setup><!-- folder path in sql -->
+				<setup>
+					<module>Ccc_Raj</module>
+				</setup>
+			</Raj_setup>
+		</resources>
+	</global>
+</config>
