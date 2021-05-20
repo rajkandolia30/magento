@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>	
+	<modules>
+		<Ccc_Shippment>
+			<version>1.0.1.0</version>
+		</Ccc_Shippment>
+	</modules>
+	<default>
+	        <carriers>
+	          <express>
+	               <active>1</active>
+	               <model>ccc_shippment/carrier_express</model>
+	               <title>Express</title>
+	              <!--  <name>Method Name</name> -->
+	               <price>5.00</price>
+	               <specificerrmsg>This shipping method is currently unavailable. If you would like to order using this shipping method, please contact us.</specificerrmsg>
+	            </express>
+         </carriers>
+	</default>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<ccc_shippment>Ccc_Shippment</ccc_shippment>
+					</modules>
+				</args>
+			</adminhtml>			
+		</routers>
+	</admin>
+	<global>
+		<helpers>
+			<shippment>
+				<class>Ccc_Shippment_Helper</class>
+			</shippment>
+		</helpers>
+		<models>
+			<ccc_shippment>
+				<class>Ccc_Shippment_Model</class>
+			</ccc_shippment>
+		</models>
+	</global>
+</config>
