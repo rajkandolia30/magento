@@ -1,0 +1,27 @@
+<h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+<?php echo $this->getChildHtml('grid'); ?>
+<?php $methods = $this->getMethods(); 
+unset($methods['paypal_billing_agreement']);
+unset($methods['free']);?>
+<?php $cart = $this->getCart(); ?>
+<?php //echo '<pre>'; print_r($cart); die(); ?>
+<form method="post" id="methodForm" action="<?php echo $this->getUrl('*/adminhtml_order_create/saveBillingMethod',['id' => $this->getRequest()->getParam('id')]); ?>">
+    <?php echo $this->getBlockHtml('formkey'); ?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+        	<h4>Billing Method</h4>
+        	<div style="float: right;">
+                <button form="methodForm" type="submit">Save Billing Method</button> 
+            </div>
+        </div>
+        <fieldset>
+            <span class="nowrap" style="font-size:15px;">
+    			<?php foreach ($methods as $key => $value):?>
+    				<?php echo $value->getTitle();?>
+    				<input type="radio" name="billingMethod" value="<?php echo $key; ?>" 
+                    <?php if($key == $cart->payment_method_code){ echo "checked";}?>><br>
+    			<?php endforeach;?>                   
+            </span>
+        </fieldset>
+    </div>
+</form>

@@ -1,0 +1,90 @@
+<?php $cart = $this->getCart(); ?>
+<?php //echo '<pre>'; print_r($cart->getData()); die(); ?>
+<?php $countries = $this->getCountryName();?>
+<?php $billing = $this->getBillingAddress(); ?>
+<?php //echo '<pre>'; print_r($billing); die(); ?>
+<h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+<form method="post" action = "<?php echo $this->getUrl('*/adminhtml_order_create/saveBillingAddress',['id' => $this->getRequest()->getParam('id')]); ?>" id="addressForm">
+<?php echo $this->getBlockHtml('formkey') ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head fieldset-legend head-billing-address">Billing Address</h4>
+          <div style="float: right;">
+               <button form="addressForm" type="submit">Save Billing Address</button> 
+           </div>
+     </div>
+    <fieldset class="np">
+    <div class="order-address" id="order-billing_address_fields">
+        <div class="content">
+            <div class="hor-scroll">
+                <table cellspacing="0" class="form-list">
+                    <tbody>
+                        <tr>
+                            <td class="label">First Name <span class="required">*</span></label>
+                            </td>
+                            <td class="value">
+                                <input id="order-billing_address_firstname" name="billing[firstname]" value="<?php echo $billing->firstname ?>" class=" required-entry input-text required-entry" type="text" required>   
+                            </td>
+                        </tr>                               
+                        <tr>
+                            <td class="label">Last Name <span class="required">*</span></label>
+                                </td>
+                            <td class="value">
+                                <input id="order-billing_address_lastname" name="billing[lastname]" value="<?php echo $billing->lastname ?>" class=" required-entry input-text required-entry" type="text" required>            
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="label"><label for="order-billing_address_street0">Street Address <span class="required">*</span></label>
+                            </td>
+                            <td class="value">
+                                <div class="multi-input"><input id="order-billing_address_street0" name="billing[street]" value="<?php echo $billing->street ?>" class="input-text required-entry" type="text" required>
+                                </div>           
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label for="order-billing_address_city">City <span class="required">*</span></label>
+                            </td>
+                            <td class="value">
+                                <input id="order-billing_address_city" name="billing[city]" value="<?php echo $billing->city ?>" class=" required-entry input-text required-entry" type="text" required>                       </td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label for="order-billing_address_city">Country <span class="required">*</span></label>
+                            </td>
+                            <td class="value">
+                                <select id="shipping_country_id" name ="billing[country_id]" class="required-entry required-entry select" required>
+                                    <?php foreach ($countries as $key => $country) : ?>
+                                        <option  value="<?php echo $country['country_id'];?>" <?php if($billing->country_id == $country['country_id']){ echo "selected";} ?>><?php echo $country['name'];?></option>
+                                    <?php endforeach; ?>
+                                </select>           
+                            </td>
+                        </tr>
+                
+                        <tr>
+                            <td class="label"><label for="order-billing_address_region">State <span class="required" style="display: none;">*</span></label>
+                            </td>
+                            <td class="value">
+                                <input id="order-billing_address_state" name="billing[region]" value="<?php echo $billing->region ?>" class=" required-entry input-text required-entry" type="text" required>            
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="label"><label for="order-billing_address_postcode">ZipCode <span class="required">*</span></label>
+                            </td>
+                            <td class="value">
+                                <input id="order-billing_address_postcode" name="billing[postcode]" value="<?php echo $billing->postcode ?>" class=" required-entry input-text required-entry" type="text" required>            
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <div class="order-save-in-address-book">
+                <input name="save_in_address_book" type="checkbox" id="order-billing_address_save_in_address_book" value="1">
+                <label for="order-billing_address_save_in_address_book">Save in address book</label>
+            </div>
+        </div>
+    <div style="display:none;" id="address-billing-overlay" class="overlay"><span>Billing address selection is not applicable</span></div>    
+    </fieldset>
+</div>
+</form>

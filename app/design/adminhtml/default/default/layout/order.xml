@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+
+	<adminhtml_adminhtml_order_index>
+		<reference name="content">
+            <block type="order/adminhtml_order" name="order"></block>
+		</reference>
+	</adminhtml_adminhtml_order_index>
+
+	<adminhtml_adminhtml_order_view>
+		<reference name="content">
+			<block type="order/admintml_order_view" name="order_view"/>
+		</reference>
+	</adminhtml_adminhtml_order_view>	
+
+	<adminhtml_adminhtml_order_create_index>
+		<reference name="content">
+            <block type="order/adminhtml_customer" name="customer"></block>
+		</reference>
+	</adminhtml_adminhtml_order_create_index>
+
+	<adminhtml_adminhtml_order_create_new>
+		 <reference name="head">
+            <action method="addJs">
+            	<file>ccc/mage.js</file>
+            </action>
+        </reference>
+		<reference name="content">
+			<block type="order/adminhtml_main" name="cart" template="order/main.phtml">
+				<!-- product -->
+				<block type="order/adminhtml_main_product" name="product" template="order/main/product.phtml">
+					<block type="order/adminhtml_main_product_grid" name="productGrid"></block>
+				</block>
+				<!-- items grid -->
+				<block type="order/adminhtml_main_orderItem" name="orderItem" template="order/main/orderItem.phtml">
+					<block type="order/adminhtml_main_orderItem_grid" name="grid"></block>
+				</block>
+				<!-- account information -->
+				<block type="order/adminhtml_main_account" name="account" template="order/main/account.phtml">
+					<block type="order/adminhtml_main_account_form" name="form"></block>
+				</block>
+				<!-- shipping address -->
+				<block type="order/adminhtml_main_shippingAddress" name="shipping" template="order/main/shippingAddress.phtml">
+					<block type="order/adminhtml_main_shippingAddress_form" name="form"></block>
+				</block>
+				<!-- billing address -->
+				<block type="order/adminhtml_main_billingAddress" name="billing" template="order/main/billingAddress.phtml">
+					<block type="order/adminhtml_main_billingAddress_form" name="form"></block>
+				</block>
+				<!-- shipping method -->
+				<block type="order/adminhtml_main_shippingMethod" name="shippingMethod" template="order/main/shippingMethod.phtml">
+					<block type="order/adminhtml_main_shippingMethod_grid" name="grid"></block>
+				</block>
+				<!-- billing method -->
+				<block type="order/adminhtml_main_billingMethod" name="billingMethod" template="order/main/billingMethod.phtml">
+					<block type="order/adminhtml_main_billingMethod_grid" name="grid"></block>
+				</block>
+				<!-- orderbill -->
+				<block type="order/adminhtml_main_orderTotal" name="orderTotal" template="order/main/orderTotal.phtml"></block>
+			</block>
+		</reference>
+	</adminhtml_adminhtml_order_create_new>
+	
+</layout>

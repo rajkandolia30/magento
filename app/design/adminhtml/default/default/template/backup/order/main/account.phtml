@@ -1,0 +1,32 @@
+<h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+<?php echo $this->getChildHtml('form'); ?>
+<?php $customer = $this->getCustomerInformation();?>
+<?php //echo '<pre>';print_r($customer);die(); ?>
+<div id="order-form_account">
+	<div class="entry-edit">
+    	<div class="entry-edit-head">
+        	<h4 class="icon-head fieldset-legend head-account">Account Information</h4>
+    	</div>
+	    <div id="customer_account_fieds">
+	        <div class="fieldset " id="main">
+				<div class="hor-scroll">
+	                <table cellspacing="0" class="form-list">      				
+						<tr>
+    						<td class="label"><label for="name">Name</label></td>
+							<td class="value">
+    							<input id="email" name="" value="<?php echo $customer->firstname.' '.$customer->lastname?>" class="validate-email input-text" type="text">   
+    						</td>
+						</tr>
+						<tr>
+    						<td class="label"><label for="email">Email</label></td>
+							<td class="value">
+    							<input id="email" name="" value="<?php echo $customer->email; ?>" class="validate-email input-text" type="text">            
+    						</td>
+						</tr>
+	    			</table>
+	        	</div>
+	    	</div>
+	    </div>
+    
+	</div>
+</div>

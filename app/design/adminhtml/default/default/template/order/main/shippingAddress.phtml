@@ -1,0 +1,91 @@
+<?php $countries = $this->getCountryName();?>
+<?php $shipping = $this->getShippingAddress(); ?>
+<?php //echo '<pre>'; print_r($shipping); die(); ?>
+<h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+<form action="<?php echo $this->getUrl('*/adminhtml_order_create/saveShippingAddress',['id' => $this->getRequest()->getParam('id')]); ?>" method="post" id="shippingAddress">
+    <?php echo $this->getBlockHtml('formkey') ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head fieldset-legend head-shipping-address">Shipping Address</h4>
+        <div style="float: right;">
+            <button form="shippingAddress" type="submit">Save Shipping Address</button> 
+        </div>
+     </div>
+    <fieldset class="np">
+    <div class="order-address" id="order-shipping_address_fields">
+        <div class="content">
+            <div class="hor-scroll">
+            	<div id="order-shipping_address_choice" class="order-choose-address">
+               			<input type="checkbox" id="order-shipping_as_shipping" name="same_as_billing" value="1">
+       					<label for="order-shipping_as_shipping" class="no-float">Same As Billing Address</label>
+            	</div>
+                <table cellspacing="0" class="form-list">
+            		<tbody>
+						<tr>
+        					<td class="label"><label for="order-shipping_address_firstname">First Name <span class="required">*</span></label>
+        					</td>
+    						<td class="value">
+        						<input id="order-shipping_address_firstname" name="shipping[firstname]" value="<?php echo $shipping->firstname ?>" class=" required-entry input-text required-entry" type="text" required>           
+    						</td>
+						</tr>								
+						<tr>
+						    <td class="label"><label for="order-shipping_address_lastname">Last Name <span class="required">*</span></label>
+						        </td>
+    						<td class="value">
+        						<input id="order-shipping_address_lastname" name="shipping[lastname]" value="<?php echo $shipping->lastname ?>" class=" required-entry input-text required-entry" type="text" required>            
+        						</td>
+    					</tr>
+						<tr>
+        					<td class="label"><label for="order-shipping_address_street0">Street Address <span class="required">*</span></label>
+        					</td>
+    						<td class="value">
+        						<div class="multi-input"><input id="order-shipping_address_street0" name="shipping[street]" value="<?php echo $shipping->street?>" class="input-text required-entry" type="text" required>
+								</div>          
+							</td>
+    					</tr>
+						<tr>
+        					<td class="label"><label for="order-shipping_address_city">City <span class="required">*</span></label>
+        					</td>
+						    <td class="value">
+						        <input id="order-shipping_address_city" name="shipping[city]" value="<?php echo $shipping->city ?>" class=" required-entry input-text required-entry" type="text" required>            
+						    </td>
+    					</tr>
+    					<tr>
+        					<td class="label"><label for="order-shipping_address_city">Country <span class="required">*</span></label>
+        					</td>
+						    <td class="value">
+						        <select id="shipping_country_id" name="shipping[country_id]" class="required-entry required-entry select" required>
+                                    <?php foreach ($countries as $key => $country) : ?>
+                                        <option name="<?php echo $country['country_id'];?>" <?php if($shipping->country_id == $country['country_id']){ echo "selected";} ?>><?php echo $country['name'];?></option>
+                                    <?php endforeach; ?>
+                                </select>      
+						    </td>
+    					</tr>
+				
+						<tr>
+							<td class="label"><label for="order-shipping_address_region">State <span class="required" style="display: none;">*</span></label>
+							</td>
+							<td class="value">
+						        <input id="order-shipping_address_state" name="shipping[region]" value="<?php echo $shipping->region ?>" class=" required-entry input-text required-entry" type="text" required>            
+						    </td>
+						</tr>
+						<tr>
+					        <td class="label"><label for="order-shipping_address_postcode">ZipCode <span class="required">*</span></label>
+					        </td>
+						    <td class="value">
+						        <input id="order-shipping_address_postcode" name="shipping[postcode]" value="<?php echo $shipping->postcode ?>" class=" required-entry input-text required-entry" type="text" required>            
+						    </td>
+					    </tr>
+            		</tbody>
+    			</table>
+        	</div>
+            </div>
+        	<div class="order-save-in-address-book">
+            	<input name="save_in_address_book" type="checkbox" id="order-shipping_address_save_in_address_book" value="1">
+            	<label for="order-shipping_address_save_in_address_book">Save in address book</label>
+        	</div>
+    	</div>
+    <div style="display:none;" id="address-shipping-overlay" class="overlay"><span>Shipping address selection is not applicable</span></div>
+	</fieldset>
+</div>
+</form>

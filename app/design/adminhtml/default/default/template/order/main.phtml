@@ -1,0 +1,74 @@
+<?php $cart = $this->getCart(); ?>
+<?php //echo '<pre>'; print_r($cart); die(); ?>
+<!-- header -->
+<div style="float: right;">
+  <a href="<?php echo $this->getUrl('*/adminhtml_order/saveOrder', ['id' => $this->getRequest()->getParam('id')]); ?>"><button type="button">Save order</button></a>    
+</div>
+<h3><?php echo $this->getHeader(); ?></h3>
+<hr>
+<!-- product grid -->
+<div>
+	<div>
+    <?php echo $this->getChildHtml('product'); ?>
+  </div>
+</div>
+<hr>
+<!-- ordered item -->
+<div>
+  <div>
+    <?php echo $this->getChild('orderItem')->setCart($cart)->toHtml(); ?>
+  </div>
+</div>
+<hr>
+<!-- account information -->
+<div>
+  <div>
+	 <?php echo $this->getChildHtml('account'); ?>
+  </div>
+</div>
+<hr>
+<!-- addresses -->
+<div style="display: flex;">
+    <!-- billing address -->
+    <div style="width:60%">
+        <div>
+            <?php echo $this->getChild('billing')->setCart($cart)->toHtml(); ?>       
+        </div>
+    </div>
+    <!-- shipping address -->
+    <div style="margin-left:10px; width:60%">
+        <div>
+            <?php echo $this->getChild('shipping')->setCart($cart)->toHtml(); ?>
+        </div>
+    </div>
+</div>
+<hr>
+<!-- method -->
+<div style="display: flex;">
+  <!-- billing method -->
+    <div style="width:60%">
+        <div>
+            <?php echo $this->getChild('billingMethod')->setCart($cart)->toHtml(); ?>
+        </div>
+    </div>
+<!-- shipping method -->
+    <div style="margin-left:10px; width:60%">
+        <div>
+            <?php echo $this->getChild('shippingMethod')->setCart($cart)->toHtml(); ?>
+            
+        </div>
+    </div>
+</div>
+<hr>
+<!-- bill -->
+<div style="margin-left:650px; width:50%">
+    <div>
+        <?php echo $this->getChildHtml('orderTotal');?>
+    </div>
+</div>
+<script type="text/javascript">
+  document.getElementById('productGrid').style.display = 'none';
+  function productGrid(){
+    document.getElementById('productGrid').style.display = 'block';
+  }
+</script>

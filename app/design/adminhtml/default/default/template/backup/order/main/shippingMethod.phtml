@@ -1,0 +1,24 @@
+<h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+<?php echo $this->getChildHtml('grid'); ?>
+<?php $methods = $this->getMethods(); ?>
+<?php $cart = $this->getCart(); ?>
+<form method="post" id="formMethod" action="<?php echo $this->getUrl('*/adminhtml_order_create/saveShippingMethod',['id' => $this->getRequest()->getParam('id')]); ?>">
+    <?php echo $this->getBlockHtml('formkey') ?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4>Shipping Method</h4>
+            <div style="float: right;">
+                <button type="submit" form="formMethod">Save Shipping Method</button>        
+            </div>
+        </div>
+        <fieldset>
+            <span class="nowrap" style="font-size:15px;">
+            	<?php foreach($methods as $key => $value): ?>
+    				<?php echo $value->getConfigData('name'); ?>: &nbsp;&nbsp;<?php echo $value->getConfigData('price'); ?>
+    				<?php echo $value->getConfigData('id'); ?>
+    				<input type="radio" name="shippingMethod" value="<?php echo $value->getConfigData('name').' '.$value->getConfigData('price')?>" <?php if($value->getConfigData('name') == $cart->shipping_method_code){echo "checked";} ?>><br>
+    			<?php endforeach; ?>
+            </span>
+        </fieldset>
+    </div>
+</form>
