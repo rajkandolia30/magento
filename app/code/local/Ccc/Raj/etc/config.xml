@@ -2,7 +2,7 @@
 <config>
 	<modules><!-- name and version of module -->
 		<Ccc_Raj>
-			<version>0.0.6</version>
+      <version>0.0.5</version>
 		</Ccc_Raj>
 	</modules>
 	<frontend><!-- frontend related -->
@@ -32,7 +32,7 @@
 					</modules>
 				</args>
 			</adminhtml>
-
+		<routers>
 			<!-- ovewrite controller -->
 			<adminhtml>
 				<args>
@@ -45,14 +45,22 @@
 				</args>
 			</adminhtml>
 
+
 			<!-- for admin -->
 			<!-- <raj>
 				<use>admin</use>
+
+			<raj>
+				<use>admin</use><!-- for admin -->
 				<args>
 					<module>Ccc_Raj</module>
 					<frontName>raj</frontName>
 				</args>
+
 			</raj> -->
+
+			</raj>
+
 		</routers>
 	</admin>
 	<adminhtml>
@@ -60,12 +68,18 @@
 			<raj><!--key for menu -->
 				<title>Raj</title> <!-- title of menu -->
 				<sort_order>90</sort_order>
-				<children>					
+
+
+				<children>
 					<raj><!-- first child -->
 						<title>Grid</title>
 						<sort_order>1</sort_order>
 						<!-- if no children->module/type of module_controllerName/actionName-->
+
 						<action>*/adminhtml_raj/grid</action>
+
+						<action>raj/adminhtml_raj/grid</action>
+
 					</raj>
 					<raj1><!-- second child -->
 						<title>Manage</title>
@@ -74,11 +88,16 @@
 							<raj><!-- first child of manage -->
 								<title>Add</title>
 								<sort_order>1</sort_order>
+
 								<action>*/adminhtml_raj/new</action>
+
+								<action>raj/adminhtml_raj/new</action>
+
 							</raj>
 							<raj1><!-- second child of manage -->
 								<title>Edit</title>
 								<sort_order>2</sort_order>
+
 								<action>*/adminhtml_raj/edit</action>
 							</raj1>
 						</children>
@@ -88,6 +107,11 @@
 						<sort_order>3</sort_order>
 						<action>*/system1_account/index</action>
 					</raj2>
+
+								<action>raj/adminhtml_raj/edit</action>
+							</raj1>
+						</children>
+					</raj1>
 				</children>
 			</raj>
 		</menu>
@@ -154,12 +178,13 @@
 					</raj1> 
 				</entities>
 			</Ccc_Raj_Resource>
-		</models>
+    </models>
 		<helpers>
 			<raj>
 				<class>Ccc_Raj_Helper</class>
 			</raj>
 		</helpers>
+
 		<resources>
 			<Raj_setup><!-- folder path in sql -->
 				<setup>

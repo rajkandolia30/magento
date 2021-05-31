@@ -3,8 +3,13 @@ class Ccc_Raj_Block_Adminhtml_Raj_Edit_Tabs_Form extends Mage_Adminhtml_Block_Wi
 	
 	public function _prepareForm(){
 		$form = new Varien_Data_Form();
+
 		$this->setForm($form);
 		$fieldSet = $form->addFieldSet('key',['legend'=>'Manage data']);
+
+		// $form->setUseContainer(true);/*container form set*/
+		$this->setForm($form);
+		$fieldSet = $form->addFieldSet('key',['legend'=>'Manage data']);/*form table heading*/
 		$fieldSet->addField('name','text',[
 			'label' => 'Full Name',
 			'name' => 'raj[name]',

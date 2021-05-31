@@ -1,5 +1,6 @@
 <?php 
 class Ccc_Raj_IndexController extends Mage_Core_Controller_Front_Action{
+
  	public function test2Action(){
  		// echo '<pre>';
  		$this->loadLayout();
@@ -11,13 +12,22 @@ class Ccc_Raj_IndexController extends Mage_Core_Controller_Front_Action{
  		die();
 */
 
+ 	public function indexAction(){
+ 		echo '<pre>';
+
  		// $class = new Mage_Core_Model_Resource();
  		// print_r(get_class_methods($class));
 
  		// print_r(get_class_methods(get_parent_class()));
 
  		// print_r(get_class_methods(get_class()));
- 		//die();
+ 	}
+
+ 	public function newAction(){
+ 		$this->loadLayout();
+ 		/*echo 'newAction';
+ 		echo Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());*/
+ 		$this->renderLayout();
  	}
 
  	public function testAction(){
@@ -79,3 +89,4 @@ class Ccc_Raj_IndexController extends Mage_Core_Controller_Front_Action{
  		$this->renderLayout();
  	}
 }?>
+
