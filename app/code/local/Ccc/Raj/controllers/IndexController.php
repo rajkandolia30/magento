@@ -1,5 +1,17 @@
 <?php 
 class Ccc_Raj_IndexController extends Mage_Core_Controller_Front_Action{
+
+ 	public function test2Action(){
+ 		// echo '<pre>';
+ 		$this->loadLayout();
+ 		// echo 11;
+ 		$this->renderLayout();
+ 		// $model = Mage::getModel('core/config_data')->getCollection()->getData();
+ 		/*$model = Mage::getSingleton('adminhtml/config_data');
+ 		print_r($model);
+ 		die();
+*/
+
  	public function indexAction(){
  		echo '<pre>';
 
@@ -9,7 +21,6 @@ class Ccc_Raj_IndexController extends Mage_Core_Controller_Front_Action{
  		// print_r(get_class_methods(get_parent_class()));
 
  		// print_r(get_class_methods(get_class()));
- 		die();
  	}
 
  	public function newAction(){
@@ -50,4 +61,32 @@ class Ccc_Raj_IndexController extends Mage_Core_Controller_Front_Action{
  		print_r($model);
  		// print_r($model->getCollection()->getData());
  	}
-} ?>
+
+ 	public function indexAction(){
+ 		$this->loadLayout();
+ 		/*echo 'newAction';
+ 		echo Zend_Debug::dump($this->getLayout()->getUpdate()->getHandles());*/
+ 		$this->renderLayout();
+ 	}
+
+ 	public function newAction(){
+ 		$this->loadLayout();
+ 		echo "new action";
+ 		$this->renderLayout();
+ 	}
+
+ 	public function editAction(){
+ 		$this->loadLayout();
+ 		echo "edit action";
+ 		$this->renderLayout();
+ 	}
+
+ 	public function deleteAction(){
+ 		$this->loadLayout();
+ 		$id = $this->getRequest()->getParam('id');
+ 		echo $id;
+ 		echo "delete action";
+ 		$this->renderLayout();
+ 	}
+}?>
+

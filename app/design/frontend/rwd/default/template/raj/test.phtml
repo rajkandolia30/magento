@@ -1,0 +1,32 @@
+<?php 
+$data = $this->_prepareCollection();
+// echo '<pre>';
+//print_r($data->getData());
+?>
+<table>
+	<tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Mobile</th>
+		<th>Action</th>
+	</tr>	
+	<?php if(!$data->getData()): ?>
+		<tr>
+			<td colspan="3">No data found</td>
+		</tr>
+	<?php else: ?>
+		<?php foreach($data->getData() as $key => $value): ?>
+			<tr>
+				<td><?php echo $value['id']; ?></td>
+				<td><?php echo $value['name']; ?></td>
+				<td><?php echo $value['name']; ?></td>
+				<td><?php echo $value['mobile']; ?></td>
+				<td><button>Delete</button></td>
+				<td><button>Edit</button></td>
+			</tr>
+		<?php endforeach; ?>
+	<?php endif; ?>
+</table>
+
+<button>Add New</button>

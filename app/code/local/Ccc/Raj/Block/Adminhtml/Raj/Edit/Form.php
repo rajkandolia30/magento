@@ -9,7 +9,7 @@ class Ccc_Raj_Block_Adminhtml_Raj_Edit_Form extends Mage_Adminhtml_Block_Widget_
 				'method' => 'post'
 			]);
 		$form->setUseContainer(true);/**/
-		$this->setForm($form);
+		$this->setForm($form); 
 		//$fieldSet = $form->addFieldSet('key',['legend'=>'Manage data']);/*form table heading*/
 		/*$fieldSet->addField('name','text',[
 			'label' => 'Full Name',
