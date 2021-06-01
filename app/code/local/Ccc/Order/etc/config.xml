@@ -13,7 +13,17 @@
 						<ccc_order>Ccc_Order</ccc_order>
 					</modules>
 				</args>
-			</adminhtml>			
+			</adminhtml>	
+			<adminhtml>
+				<args>
+					<modules>
+						<!-- Mage_Adminhtml_Catalog_ProductController -->
+						<!-- can be any tag -->
+						<customer before="Mage_Adminhtml">Ccc_Order_Adminhtml</customer>
+						<!-- Ccc_Raj_Adminhtml_Catalog_ProductController-->					
+					</modules>
+				</args>
+			</adminhtml>		
 		</routers>
 	</admin>
 	<adminhtml>

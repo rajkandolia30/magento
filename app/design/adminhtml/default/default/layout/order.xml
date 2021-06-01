@@ -9,7 +9,7 @@
 
 	<adminhtml_adminhtml_order_view>
 		<reference name="content">
-			<block type="order/admintml_order_view" name="order_view"/>
+			<block type="order/adminhtml_order_view" name="order_view" template="order/view.phtml"/>
 		</reference>
 	</adminhtml_adminhtml_order_view>	
 

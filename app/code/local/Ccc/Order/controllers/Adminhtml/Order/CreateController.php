@@ -83,6 +83,7 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
 				$billingAddress = $cart->getCustomer()->getBillingAddress();
 				if(!$billingAddress->getEntityId()){
 					$billingAddress->setParentId($customerId);
+					$billingAddress->setIsDefaultBilling(1);
 					$billingAddress->setCreatedAt(date("Y-m-d H:i:s"));
 				} else {
 					$billingAddress->setUpdatedAt(date("Y-m-d H:i:s"));
@@ -104,41 +105,53 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
 
 			$shipping = $this->getRequest()->getPost('shipping');
 
-			$cartShippingAddress = $cart->getShippingAddress();
-			if(!$cartShippingAddress->getAddressId()){
-				$cartShippingAddress->setCartId($cart->getId());
-				$cartShippingAddress->setAddressType('shipping');
-				$cartShippingAddress->setCreatedAt(date("Y-m-d H:i:s"));				
-			} else {
-				$cartShippingAddress->setUpdatedAt(date("Y-m-d H:i:s"));
-			}
-			$cartShippingAddress->addData($shipping);
-			$cartShippingAddress->save();
-
 			$saveInAddress = $this->getRequest()->getPost('save_in_address_book');
 			if($saveInAddress){
 				$shippingAddress = $cart->getCustomer()->getShippingAddress();
 				if(!$shippingAddress->getEntityId()){
 					$shippingAddress->setParentId($customerId);
+					$shippingAddress->setIsDefaultShipping(1);
 					$shippingAddress->setCreatedAt(date("Y-m-d H:i:s"));
 				} else {
 					$shippingAddress->setUpdatedAt(date("Y-m-d H:i:s"));
 				}
 				$shippingAddress->addData($shipping);
 				$shippingAddress->save();
-			}		
+			}	
 
-			$sameAsBilling = $this->getRequest()->getPost('same_as_billing');
-			if($sameAsBilling){
-				$billing = $cart->getBillingAddress()->getData();
-				unset($billing['address_id']);
-				if(!$billing){
-					throw new Exception("Insert cart billing Address");
+			if(!empty($shipping['firstname']) 
+				&& !empty($shipping['lastname']) 
+				&& !empty($shipping['street'])
+				&& !empty($shipping['city'])
+				&& !empty($shipping['country_id'])
+				&& !empty($shipping['region'])
+				&& !empty($shipping['postcode'])){
+				$cartShippingAddress = $cart->getShippingAddress();
+				if(!$cartShippingAddress->getAddressId()){
+					$cartShippingAddress->setCartId($cart->getId());
+					$cartShippingAddress->setAddressType('shipping');
+					$cartShippingAddress->setCreatedAt(date("Y-m-d H:i:s"));				
+				} else {
+					$cartShippingAddress->setUpdatedAt(date("Y-m-d H:i:s"));
 				}
-				$shipping = $cart->getShippingAddress();
-				$shipping->addData($billing);
-				$shipping->setAddressType('shipping');
-				$shipping->save();
+				$cartShippingAddress->addData($shipping);
+				$cartShippingAddress->save();
+
+
+				$sameAsBilling = $this->getRequest()->getPost('same_as_billing');
+				if($sameAsBilling){
+					$billing = $cart->getBillingAddress()->getData();
+					unset($billing['address_id']);
+					if(!$billing){
+						throw new Exception("Insert cart billing Address");
+					}
+					$shipping = $cart->getShippingAddress();
+					$shipping->addData($billing);
+					$shipping->setAddressType('shipping');
+					$shipping->save();
+				}				
+			} else {
+				throw new Exception("Please enter all fields in shipping address");			
 			}
 			Mage::getSingleton('adminhtml/session')->addSuccess('Succesfully inserted');
 		} catch (Exception $e) {
@@ -197,16 +210,21 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
 				throw new Exception("Customer not found");
 			}
 			foreach ($quantites as $key => $quantity) {
-				if($quantity == 0){
+				if($quantity < 0){
+					Mage::getSingleton('adminhtml/session')->addError('Please insert Valid quantity');
+				} 
+				if ($quantity == 0){
 					$model = Mage::getModel('order/cart_item')->load($key);
 					$model->delete();
 					continue;
 				}
-				$cartItem = Mage::getModel('order/cart_item')->load($key);	
-				$basePrice =  $quantity * $cartItem->price - ($cartItem->discount * $quantity);
-		        $cartItem->base_price = $basePrice; 
-		        $cartItem->quantity = $quantity;
-		        $cartItem->save();
+				if($quantity > 0){
+					$cartItem = Mage::getModel('order/cart_item')->load($key);	
+					$basePrice =  $quantity * $cartItem->price - ($cartItem->discount * $quantity);
+			        $cartItem->base_price = $basePrice; 
+			        $cartItem->quantity = $quantity;
+			        $cartItem->save();
+				}
 			}
 			Mage::getSingleton('adminhtml/session')->addSuccess('Succesfully updtaed');
 		} catch (Exception $e) {

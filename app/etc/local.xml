@@ -28,10 +28,10 @@
 <config>
     <global>
         <install>
-            <date><![CDATA[Sat, 10 Apr 2021 11:32:24 +0000]]></date>
+            <date><![CDATA[Tue, 01 Jun 2021 06:59:16 +0000]]></date>
         </install>
         <crypt>
-            <key><![CDATA[b410285abfa1f0f0941a1ca8640dfacf]]></key>
+            <key><![CDATA[daeb821d6fff93a5d97fd7ead64c0217]]></key>
         </crypt>
         <disable_local_modules>false</disable_local_modules>
         <resources>
@@ -43,7 +43,7 @@
                     <host><![CDATA[localhost]]></host>
                     <username><![CDATA[root]]></username>
                     <password><![CDATA[]]></password>
-                    <dbname><![CDATA[magento]]></dbname>
+                    <dbname><![CDATA[hiren]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>

@@ -9,8 +9,7 @@ class Ccc_Order_Block_Adminhtml_Order extends Mage_Adminhtml_Block_Widget_Grid_C
 		parent::__construct();
 	}
 
-	public function getCreateUrl()
-    {
+	public function getCreateUrl(){
         return $this->getUrl('*/adminhtml_order_create/index');
     }
 }

@@ -21,7 +21,7 @@ class Ccc_Raj_Block_Adminhtml_Raj_Grid extends Mage_Adminhtml_Block_Widget_Grid{
 		]);
 		$this->addColumn('name',[
 			'header' => 'Name',
-			'type' => 'text',
+			'type' => 'varchar',
 			'index' => 'name'
 		]);
 		$this->addColumn('email',[
